@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kartu Ucapan Ulang Tahun</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Container utama */
+    .card-container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Foto samping */
+    .side-photo {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+      transform: scale(0);
+      animation: photoIn 1s forwards ease-out;
+    }
+
+    .side-photo.left {
+      animation-delay: 0.3s;
+    }
+
+    .side-photo.right {
+      animation-delay: 0.8s;
+    }
+
+    @keyframes photoIn {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    /* Kartu utama */
+    .card {
+      background: white;
+      padding: 40px 50px;
+      border-radius: 50px;
+      box-shadow: 0px 10px 25px rgba(0,0,0,0.15);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      width: 60%;
+      transform-origin: left center;
+      transform: scaleX(0);
+      animation: openCard 1s forwards ease-out;
+      animation-delay: 0.5s; 
+    }
+
+    .card img.main-photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 15px auto;
+    }
+
+    .card h1 {
+      font-size: 22px;
+      margin: 15px 0 10px;
+      color: #ff4d6d;
+    }
+
+    .card p {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #e63956;
+    }
+
+    .footer {
+      margin-top: 15px;
+      font-size: 12px;
+      color: #888;
+    }
+
+    /* Animasi kartu membuka */
+    @keyframes openCard {
+      0% {
+        transform: scaleX(0);
+        opacity: 0;
+      }
+      50% {
+        transform: scaleX(1.1);
+        opacity: 1;
+      }
+      100% {
+        transform: scaleX(1);
+      }
+    }
+
+    /* Balon animasi */
+    .balloon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      position: absolute;
+      bottom: -100px;
+      animation: floatUp 10s linear infinite;
+    }
+
+    .balloon:before {
+      content: "";
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 20px;
+      background: #444;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-110vh) scale(1.1); opacity: 0; }
+    }
+
+    /* Kembang api */
+    .firework {
+      position: absolute;
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      animation: explode 1s ease-out infinite;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 1; }
+      100% { transform: scale(0); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Balon -->
+  <div class="balloon" style="left: 20%; background:#ff4d6d; animation-delay:0s;"></div>
+  <div class="balloon" style="left: 50%; background:#4da6ff; animation-delay:3s;"></div>
+  <div class="balloon" style="left: 80%; background:#ffd633; animation-delay:6s;"></div>
+  <div class="balloon" style="left: 35%; background:#66cc99; animation-delay:1.5s;"></div>
+  <div class="balloon" style="left: 65%; background:#ff9933; animation-delay:4.5s;"></div>
+
+  <!-- Container kartu dan foto samping -->
+  <div class="card-container">
+    <img src="foto2.jpg" alt="Foto Kiri" class="side-photo left">
+    
+    <div class="card">
+      <img src="foto1.jpg" alt="Foto Utama" class="main-photo">
+      <h1>Selamat Ulang Tahun Sayang 🎉</h1>
+      <p>Semoga panjang umur, sehat selalu, dan sukses dalam setiap langkahmu ✨</p>
+      <button onclick="playMusic()">▶ Putar Musik</button>
+      <audio id="music" src="hbd.mp3"></audio>
+      <div class="footer">Kartu ucapan digital estetik 🎂</div>
+    </div>
+    
+    <img src="foto3.jpg" alt="Foto Kanan" class="side-photo right">
+  </div>
+
+  <!-- Kembang api -->
+  <script>
+    function createFirework() {
+      const firework = document.createElement('div');
+      firework.classList.add('firework');
+      firework.style.left = Math.random() * window.innerWidth + 'px';
+      firework.style.top = Math.random() * window.innerHeight/2 + 'px';
+      firework.style.background = hsl(${Math.random()*360}, 100%, 50%);
+      firework.style.width = firework.style.height = Math.random() * 8 + 5 + 'px';
+      document.body.appendChild(firework);
+      setTimeout(() => firework.remove(), 1000);
+    }
+
+    function launchFireworks() {
+      for (let i = 0; i < 20; i++) {
+        setTimeout(createFirework, i * 200);
+      }
+    }
+
+    launchFireworks(); 
+  </script>
+
+  <script>
+    function playMusic() {
+      let music = document.getElementById("music");
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+  </script>
+</body>
+</html>
